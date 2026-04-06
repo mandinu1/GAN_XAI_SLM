@@ -1,8 +1,3 @@
----
-
-## `.gitignore`
-
-```gitignore
 # Python
 __pycache__/
 *.py[cod]
@@ -20,6 +15,7 @@ ENV/
 # VS Code / macOS
 .vscode/
 .DS_Store
+Thumbs.db
 
 # Build / packaging
 build/
@@ -35,7 +31,7 @@ dist/
 *.pt
 *.ckpt
 
-# Large outputs
+# Generated outputs
 experiments/
 runs/
 outputs/
@@ -45,14 +41,12 @@ samples/
 evaluation/
 training_plots/
 
-# Images and generated reports
-*.png
-*.jpg
-*.jpeg
-*.pdf
+# Generated arrays and reports
 *.npy
 *.npz
-*.json
+experiments/**/*.json
+outputs/**/*.json
+results/**/*.json
 
 # Cache
 .cache/
@@ -63,10 +57,7 @@ training_plots/
 hf_cache/
 transformers_cache/
 
-# Environment files / secrets
+# Secrets
 .env
 .env.*
 *.env
-
-# OS files
-Thumbs.db
