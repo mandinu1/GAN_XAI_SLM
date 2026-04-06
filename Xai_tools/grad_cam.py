@@ -62,18 +62,7 @@ def overlay_cam(image, cam):
 
 
 def extract_regions_from_map(cam, threshold=0.6, min_area=20, top_k=5):
-    """
-    Extract important regions from a normalized heatmap.
-
-    Args:
-        cam: torch.Tensor [H, W] or numpy array [H, W] in range [0, 1]
-        threshold: float threshold for selecting salient regions
-        min_area: minimum contour area to keep
-        top_k: maximum number of regions to return
-
-    Returns:
-        list of dicts with bbox, centroid, area, and score
-    """
+    
     if isinstance(cam, torch.Tensor):
         cam_np = cam.detach().cpu().numpy()
     else:

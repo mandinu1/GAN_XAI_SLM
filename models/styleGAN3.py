@@ -33,12 +33,7 @@ class StyleGAN3Config:
 
 
 class StyleGAN3Model:
-    """
-    Wrapper around the official NVLabs StyleGAN3 repository.
-
-    This prepares a 256x256 dataset zip and then calls the official
-    StyleGAN3 scripts for training, generation, and evaluation.
-    """
+    
 
     def __init__(self, args):
         self.config = StyleGAN3Config(
@@ -247,14 +242,14 @@ class StyleGAN3Model:
         print("StyleGAN3 training finished.")
         print(f"Outputs saved in: {self.training_outdir}")
 
-        # Automatically find and copy the latest trained model
+        
         try:
             latest_model = self._find_latest_network_pkl()
 
             # main saved model in run directory
             saved_model_path = self.run_dir / "stylegan3_trained_model.pkl"
 
-            # also store inside a dedicated models folder
+            
             models_dir = self.run_dir / "models"
             models_dir.mkdir(parents=True, exist_ok=True)
             models_copy_path = models_dir / "stylegan3_trained_model.pkl"

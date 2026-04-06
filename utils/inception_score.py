@@ -36,7 +36,7 @@ def inception_score(
     inception = get_inception_model(device)
     upsample = nn.Upsample(size=(299, 299), mode="bilinear", align_corners=False).to(device)
 
-    # Images are expected in [0,1] for this project
+    # Images are expected in [0,1] range for Inception v3
     imgs = imgs.to(device=device, dtype=torch.float32)
     imgs = torch.clamp(imgs, 0.0, 1.0)
 

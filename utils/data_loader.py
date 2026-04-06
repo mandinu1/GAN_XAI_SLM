@@ -3,9 +3,7 @@ from torchvision import datasets, transforms
 import torch.utils.data as data_utils
 
 def get_data_loader(args, feature_extraction=False, target_class=None):
-    """
-    target_class: str, optional, e.g., 'airplane' to load only one class
-    """
+    
     if feature_extraction:
         transform = transforms.Compose([
             transforms.Resize(224),

@@ -4,16 +4,11 @@ import torch.nn.functional as F
 
 
 def calculate_ms_ssim(fake_images):
-    """
-    Calculate average MS-SSIM across adjacent generated image pairs.
-
-    Expected input range for this project: [0, 1].
-    """
+    
     fake_images = fake_images.to(dtype=torch.float32)
     fake_images = torch.clamp(fake_images, 0.0, 1.0)
 
-    # MS-SSIM works more reliably on reasonably sized images.
-    # Keep native 256x256 images unchanged, but upsample very small images.
+   
     if fake_images.shape[2] < 160 or fake_images.shape[3] < 160:
         fake_images = F.interpolate(
             fake_images,

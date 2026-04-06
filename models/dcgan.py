@@ -162,7 +162,7 @@ class DCGAN_MODEL:
 
         if self.use_xai and self.xai_mode in ["gradcam", "both"]:
             from Xai_tools.grad_cam import GradCAM
-            # Use an earlier convolutional layer (8x8 feature map) for richer Grad-CAM attention
+            # Uses an earlier convolutional layer (8x8 feature map) for richer Grad-CAM attention
             self.gradcam = GradCAM(self.D, self.D.features[11])
 
         if self.use_xai and self.xai_mode in ["saliency", "both"]:
@@ -272,7 +272,7 @@ class DCGAN_MODEL:
             # FID Calculation every epoch
             self.G.eval()
 
-            # Get all available real validation images first
+           
             real_batch = []
             for imgs, _ in test_loader:
                 real_batch.append(imgs)
@@ -320,7 +320,7 @@ class DCGAN_MODEL:
         self.save_loss_plots(g_losses, d_losses, gradcam_losses, saliency_losses, total_xai_losses, fid_scores)
 
     def save_best_samples(self, epoch):
-        # Remove previously saved best samples so only the final current-best epoch images remain
+        
         for fname in os.listdir(self.sample_dir):
             if fname.endswith(".png"):
                 os.remove(os.path.join(self.sample_dir, fname))
@@ -430,7 +430,7 @@ class DCGAN_MODEL:
     def evaluate(self, test_loader=None):
         self.G.eval()
 
-        # Use all available real images from validation/test loader if provided
+        
         if test_loader is not None:
             real_images_batch = []
             for imgs, _ in test_loader:
@@ -444,7 +444,7 @@ class DCGAN_MODEL:
             n_real = 100
             real_images_norm = None
 
-        # Generate the same number of fake images as real images for fair evaluation
+        # Generating the same number of fake images as real images for fair evaluation
         z = torch.randn(n_real, 100, 1, 1, device=device)
         with torch.no_grad():
             fake_images = self.G(z)
@@ -459,13 +459,13 @@ class DCGAN_MODEL:
         )
 
         if real_images_norm is None:
-            # fallback: use same fake images as real (not ideal)
+            
             real_images_norm = fake_images_norm.clone()
 
         fid_score = calculate_fid(real_images_norm, fake_images_norm)
         ms_ssim_score = calculate_ms_ssim(fake_images_norm)
 
-        # --------- Save metrics ---------
+        # Save metrics to a text file
         metrics_path = os.path.join(self.eval_dir, "metrics.txt")
         with open(metrics_path, "w") as f:
             f.write(f"Inception Score: {is_mean:.4f} ± {is_std:.4f}\n")
@@ -474,7 +474,7 @@ class DCGAN_MODEL:
             f.write(f"XAI Enabled: {self.use_xai}\n")
             f.write(f"Lambda XAI: {self.lambda_xai}\n")
 
-        # --------- Save generated images ---------
+        # Save generated images 
         samples = fake_images_norm[:64]  # first 64 images
         for idx, img in enumerate(samples):
             utils.save_image(
