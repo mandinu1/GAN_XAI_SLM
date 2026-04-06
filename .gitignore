@@ -42,6 +42,9 @@ evaluation/
 training_plots/
 
 # Generated arrays and reports
+*.png
+*.jpg
+*.jpeg
 *.npy
 *.npz
 experiments/**/*.json
