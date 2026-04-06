@@ -1,0 +1,5 @@
+Inception Score: 2.1272 ± 0.2234
+FID Score: 177.6221
+MS-SSIM: 0.3917
+XAI Enabled: True
+Lambda XAI: 0.1

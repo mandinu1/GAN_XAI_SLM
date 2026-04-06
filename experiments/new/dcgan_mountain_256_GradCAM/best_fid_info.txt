@@ -1,0 +1,2 @@
+Best epoch: 287
+Best FID: 105.8578

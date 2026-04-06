@@ -1,0 +1,16 @@
+[SLM 2 — microsoft/Phi-3.5-mini-instruct]
+
+Decision summary:
+The discriminator gave this image a very low score, so it considered the image unlikely to be real.
+
+Method-wise explanation:
+- Grad-CAM: Checks which broader high-level regions in the image most influenced the discriminator's real or fake decision. It highlighted 1 region(s). The top region is at x=39, y=54, w=57, h=42, score=0.6842.
+- Saliency: Checks which exact pixels or very local details the discriminator is most sensitive to. It highlighted 1 region(s). The top region is at x=82, y=5, w=10, h=8, score=0.3945.
+- LIME: Checks which interpretable image patches or segments change the discriminator decision most when perturbed. It highlighted 4 region(s). The top region is at x=0, y=0, w=98, h=73, score=0.0159.
+- SHAP: Checks how much each region contributes to pushing the discriminator output toward real or fake compared with a baseline. It highlighted 1 region(s). The top region is at x=0, y=243, w=12, h=12, score=0.2452.
+
+Agreement analysis:
+The explanation methods show low agreement with an average IoU of 0.0232. This means the methods do not strongly overlap and may be capturing different cues.
+
+Interpretation:
+Because this is a real image, the explanation should be read as evidence of which visual regions influenced the discriminator most. The combination of Grad-CAM, Saliency, LIME, and SHAP suggests the discriminator relied on a mixture of broad structure and local details rather than a single perfectly shared region.

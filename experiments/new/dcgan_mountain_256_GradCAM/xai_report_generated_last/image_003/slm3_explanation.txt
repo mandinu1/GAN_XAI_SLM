@@ -1,0 +1,16 @@
+[SLM 3 — mistralai/Mistral-7B-Instruct-v0.3]
+
+Decision summary:
+The discriminator in the generated image was scored as 0.7855, indicating a leaning towards the image being real.
+
+Method-wise Explanation:
+- Grad-CAM: The broader high-level region that most influenced the discriminator's decision was located at bbox=(x=0, y=0, w=215, h=29), with a score of 0.7436. This region is centered at (104.13, 11.81).
+- Saliency: The discriminator was most sensitive to the exact pixels located at bbox=(x=49, y=73, w=6, h=4), with a score of 0.5471. The centroid of this region is at (51.56, 74.65).
+- LIME: The interpretable image patches that changed the discriminator decision most when perturbed were located at bbox=(x=68, y=0, w=130, h=98) and bbox=(x=145, y=212, w=85, h=44). Both regions had a score of 0.0103.
+- SHAP: Regions that contributed to pushing the discriminator output toward real compared with a baseline were located at bbox=(x=228, y=3, w=7, h=3) and bbox=(x=241, y=3, w=10, h=2). Both regions had a score of 0.539 and 0.5378 respectively.
+
+Agreement analysis:
+- The agreement level between the XAI methods was low, with an average Intersection over Union (IoU) of 0.0413. This suggests that the methods are highlighting different regions of the image as being influential in the discriminator's decision.
+
+Interpretation:
+The discriminator's decision to lean towards the image being real was influenced by a broad region near the top of the image, as highlighted by Grad-CAM. However, the exact pixels that the discriminator is most sensitive to, as shown by Saliency, are located elsewhere in the image. The interpretable image patches that change the discriminator decision most when perturbed, as shown by LIME, are located in different parts of the image compared to the regions highlighted by Grad-CAM, Saliency, and SHAP. This suggests that the discriminator is considering a wide range of features in its decision-making process.
