@@ -17,9 +17,7 @@ class DiscriminatorWrapper(torch.nn.Module):
 
 
 def extract_shap_regions(shap_map, min_area=20, top_k=5, threshold_ratio=0.6):
-    """
-    Convert a SHAP attribution map into structured important regions.
-    """
+    
     if shap_map.ndim == 3:
         shap_map = np.mean(np.abs(shap_map), axis=2)
     else:
@@ -61,16 +59,7 @@ def extract_shap_regions(shap_map, min_area=20, top_k=5, threshold_ratio=0.6):
 
 
 def run_shap(dcgan_model, background, test_image, device=None, min_area=20, top_k=5, threshold_ratio=0.6):
-    """
-    background: numpy array [N, H, W, C] in [0,1]
-    test_image: numpy array [1, H, W, C] in [0,1]
-
-    Returns:
-        dict with:
-        - shap_values: raw SHAP values
-        - shap_map: condensed attribution map for visualization/regions
-        - important_regions: structured regions
-    """
+    
     if device is None:
         device = next(dcgan_model.D.parameters()).device
 

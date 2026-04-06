@@ -6,18 +6,7 @@ import torch
 
 
 def extract_lime_regions(mask, weights_dict, min_area=20, top_k=5):
-    """
-    Extract structured region information from a LIME mask.
-
-    Args:
-        mask: numpy array [H, W] with non-zero values for selected regions
-        weights_dict: dict mapping segment id -> weight from LIME local explanation
-        min_area: minimum region area to keep
-        top_k: maximum number of regions to return
-
-    Returns:
-        list of dicts with bbox, centroid, area, and score
-    """
+    
     binary = (mask > 0).astype(np.uint8)
     labeled = label(binary)
 
@@ -58,16 +47,7 @@ def extract_lime_regions(mask, weights_dict, min_area=20, top_k=5):
 
 
 def run_lime(dcgan_model, image, device=None, num_samples=500, min_area=20, top_k=5):
-    """
-    Run LIME on a single GAN image.
-
-    Returns:
-        dict with:
-        - image: visualization image with boundaries
-        - mask: selected region mask
-        - important_regions: structured regions
-        - raw_weights: segment weight mapping
-    """
+   
     if device is None:
         device = next(dcgan_model.D.parameters()).device
 
